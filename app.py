@@ -76,8 +76,18 @@ if result:
         unsafe_allow_html=True,
     )
 
+    # 다운로드 링크도 페이지 안에 직접 심기 (서버 임시 파일을 거치지 않음)
+    safe_name = f"{result['name']}_단가표.png".replace('"', "")
+    st.markdown(
+        f'<a href="data:image/png;base64,{b64}" download="{safe_name}" '
+        'style="display:block;text-align:center;padding:0.6rem 1rem;margin:0.5rem 0;'
+        'border-radius:0.5rem;background:#0064FF;color:#fff;font-weight:600;'
+        'text-decoration:none;">⬇️ 이미지 다운로드</a>',
+        unsafe_allow_html=True,
+    )
+
     st.download_button(
-        label="⬇️ 이미지 다운로드",
+        label="⬇️ 이미지 다운로드 (예비)",
         data=result["png"],
         file_name=f"{result['name']}_단가표.png",
         mime="image/png",
